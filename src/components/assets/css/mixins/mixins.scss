@@ -1,0 +1,11 @@
+// @mixin b($block) {
+//   $B: $namespace+'-'+$block !global;
+// }
+
+@mixin b($block) {
+  $B: $namespace+'-'+$block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
