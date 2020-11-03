@@ -39,13 +39,7 @@ export default {
   },
   render(h) {
     const className = [];
-    // className.push(`nt-col-${this.span}`)
-    // if(this.offset && this.offset > 0 && this.offset <= 24) {
-    //    className.push(`nt-col-offset-${this.offset}`)
-    // }
-    // if(this.push && this.push > 0 && this.push <=24) {
-    //   className.push(`nt-col-push-${this.push}`)
-    // }
+    
     ['span','offset','push'].forEach(prop => {
       if(this[prop] || this[prop] === 0) {
         className.push(`nt-col-${prop}-${this[prop]}`)
@@ -71,6 +65,13 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+$namespace: "nt";
+@mixin b($row) {
+  $name: $namespace + "-" + $row;
+  .#{$name} {
+    @content;
+  }
+}
 @for $i from 1 through 24 {
   .nt-col-span-#{$i} {
     width: ($i/24) * 100%;
@@ -82,6 +83,12 @@ export default {
     margin-left: -($i/24) * 100%;
   }
 }
+
+@include b(col) {
+  display: inline-block;
+  box-sizing: border-box;
+}
+
 .nt-col {
   display: inline-block;
   box-sizing: border-box;

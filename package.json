@@ -1,7 +1,6 @@
 {
   "name": "Nineteen-ui",
   "version": "1.0.0",
-  "description": "",
   "main": "dist/index.js",
   "dependencies": {
     "@babel/core": "^7.12.3",
@@ -20,7 +19,7 @@
   },
   "scripts": {
     "build": "rollup -wc rollup.config.dev.js",
-    "commit":"git cz"
+    "commit": "git cz"
   },
   "keywords": [],
   "author": "",
@@ -29,5 +28,14 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/19Qingfeng/Nineteen-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/19Qingfeng/Nineteen-ui/issues"
+  },
+  "homepage": "https://github.com/19Qingfeng/Nineteen-ui#readme",
+  "description": ""
 }

@@ -46,8 +46,8 @@ export default {
       {
         class: [
           "nt-row",
-          this.flex ? "nt-row-flex" : "",
-          this.justify !== "start" ? `nt-row-justify-${this.justify}` : "",
+          this.flex ? "nt-row--flex" : "",
+          this.justify !== "start" ? `is-justify-${this.justify}` : "",
         ],
         style: this.style,
       },
@@ -58,23 +58,86 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.nt-row-flex {
-  display: flex;
+$namespace: "nt";
+$modifier-separator: "--";
+$state-prefix: "is-";
+
+@mixin b($row) {
+  $name: $namespace + "-" + $row;
+  .#{$name} {
+    @content;
+  }
 }
-/* 找不到rollup中类型webpack的sass-resource-loader scss变量先放一放 */
-.nt-row-justify-center {
-  justify-content: center;
+
+@mixin m($modifier) {
+  $selector: &;
+  $currentSelector: "";
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector +
+      & +
+      $modifier-separator +
+      $unit +
+      ","}; // &--flex   ->
+  }
+  @at-root {
+    #{$currentSelector} {
+      // nt-row--flex
+      @content;
+    }
+  }
 }
-.nt-row-justify-end {
-  justify-content: flex-end;
+
+@mixin when($state) {
+  @at-root {
+    // nt-row--flex.is-justify-center
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
 }
-.nt-row-justify-space-between {
-  justify-content: space-between;
+
+@include b(row) {
+  position: relative;
+  box-sizing: border-box;
+  @include m(flex) {
+    // nt-row-flex
+    display: flex;
+    &:before,
+    &:after {
+      display: none;
+    }
+    // nt-row--flex.is-justify-center
+    @include when(justify-center) {
+      justify-content: center;
+    }
+    @include when(justify-start) {
+      justify-content: flex-start;
+    }
+    @include when(justify-space-between) {
+      justify-content: space-between;
+    }
+    @include when(justify-space-around) {
+      justify-content: space-around;
+    }
+  }
 }
-.nt-row-justify-space-around {
-  justify-content: space-around;
-}
-/* scss抽时间系统性学习吧 语法问题太多了 */
+
+// .nt-row-flex {
+//   display: flex;
+// }
+// .nt-row-justify-center {
+//   justify-content: center;
+// }
+// .nt-row-justify-end {
+//   justify-content: flex-end;
+// }
+// .nt-row-justify-space-between {
+//   justify-content: space-between;
+// }
+// .nt-row-justify-space-around {
+//   justify-content: space-around;
+// }
+
 // @include b(row) {
 //   position: relative;
 //   box-sizing: border-box;
