@@ -28,12 +28,9 @@ $--header-padding: 10px;
 }
 
 @include b(header) {
-  flex-shrink: 0;
-}
-
-@include b(header) {
   padding: $--header-padding;
   box-sizing: border-box;
   flex-shrink: 0;
 }
 </style>
+
