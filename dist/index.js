@@ -399,10 +399,71 @@
       undefined
     );
 
+  //
+  //
+  //
+  //
+  //
+  //
+  var script$3 = {
+    name: "NtHeader",
+    props: {
+      height: {
+        type: String,
+        "default": "60px"
+      }
+    }
+  };
+
+  /* script */
+  const __vue_script__$3 = script$3;
+
+  /* template */
+  var __vue_render__$1 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("header", { style: { height: _vm.height } }, [_vm._t("default")], 2)
+  };
+  var __vue_staticRenderFns__$1 = [];
+  __vue_render__$1._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$3 = function (inject) {
+      if (!inject) return
+      inject("data-v-876fd1d0_0", { source: ".nt-header[data-v-876fd1d0] {\n  flex-shrink: 0;\n}\n.nt-header[data-v-876fd1d0] {\n  padding: 10px;\n  box-sizing: border-box;\n  flex-shrink: 0;\n}\n\n/*# sourceMappingURL=index.vue.map */", map: {"version":3,"sources":["C:\\Users\\Administrator\\Desktop\\Nineteen-ui\\src\\components\\Header\\index.vue","index.vue"],"names":[],"mappings":"AAwBA;EAMA,cAAA;AC5BA;ADsBA;EAUA,aAdA;EAeA,sBAAA;EACA,cAAA;AC5BA;;AAEA,oCAAoC","file":"index.vue","sourcesContent":["<template>\r\n  <header :style=\"{ height }\">\r\n    <slot />\r\n  </header>\r\n</template>\r\n\r\n<script>\r\nexport default {\r\n  name: \"NtHeader\",\r\n  props: {\r\n    height: {\r\n      type: String,\r\n      default: \"60px\",\r\n    },\r\n  },\r\n};\r\n</script>\r\n\r\n<style lang=\"scss\" scoped>\r\n$namespace: \"nt\";\r\n$--header-padding: 10px;\r\n\r\n@mixin b($row) {\r\n  $name: $namespace + \"-\" + $row;\r\n  .#{$name} {\r\n    @content;\r\n  }\r\n}\r\n\r\n@include b(header) {\r\n  flex-shrink: 0;\r\n}\r\n\r\n@include b(header) {\r\n  padding: $--header-padding;\r\n  box-sizing: border-box;\r\n  flex-shrink: 0;\r\n}\r\n</style>\r\n",".nt-header {\n  flex-shrink: 0;\n}\n\n.nt-header {\n  padding: 10px;\n  box-sizing: border-box;\n  flex-shrink: 0;\n}\n\n/*# sourceMappingURL=index.vue.map */"]}, media: undefined });
+
+    };
+    /* scoped */
+    const __vue_scope_id__$3 = "data-v-876fd1d0";
+    /* module identifier */
+    const __vue_module_identifier__$3 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$3 = false;
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$3 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
+      __vue_inject_styles__$3,
+      __vue_script__$3,
+      __vue_scope_id__$3,
+      __vue_is_functional_template__$3,
+      __vue_module_identifier__$3,
+      false,
+      createInjector,
+      undefined,
+      undefined
+    );
+
   function main (Vue) {
     Vue.component(__vue_component__.name, __vue_component__);
     Vue.component(__vue_component__$1.name, __vue_component__$1);
     Vue.component(__vue_component__$2.name, __vue_component__$2);
+    Vue.component(__vue_component__$3.name, __vue_component__$3);
   }
 
   return main;
