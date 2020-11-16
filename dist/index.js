@@ -287,11 +287,11 @@
     /* style */
     const __vue_inject_styles__$1 = function (inject) {
       if (!inject) return
-      inject("data-v-b3cb04dc_0", { source: ".nt-row[data-v-b3cb04dc] {\n  position: relative;\n  box-sizing: border-box;\n}\n.nt-row--flex[data-v-b3cb04dc] {\n  display: flex;\n}\n.nt-row--flex[data-v-b3cb04dc]:before, .nt-row--flex[data-v-b3cb04dc]:after {\n  display: none;\n}\n.nt-row--flex.is-justify-center[data-v-b3cb04dc] {\n  justify-content: center;\n}\n.nt-row--flex.is-justify-start[data-v-b3cb04dc] {\n  justify-content: flex-start;\n}\n.nt-row--flex.is-justify-space-between[data-v-b3cb04dc] {\n  justify-content: space-between;\n}\n.nt-row--flex.is-justify-space-around[data-v-b3cb04dc] {\n  justify-content: space-around;\n}\n\n/*# sourceMappingURL=index.vue.map */", map: {"version":3,"sources":["C:\\Users\\Administrator\\Desktop\\Nineteen-ui\\src\\components\\Row\\index.vue","index.vue"],"names":[],"mappings":"AAkEA;EAiCA,kBAAA;EACA,sBAAA;ACjGA;AD+EA;EAqBA,aAAA;ACjGA;ADkGA;EAEA,aAAA;ACjGA;ADmFA;EAkBA,uBAAA;AClGA;ADgFA;EAqBA,2BAAA;ACjGA;AD4EA;EAwBA,8BAAA;AChGA;ADwEA;EA2BA,6BAAA;AC/FA;;AAEA,oCAAoC","file":"index.vue","sourcesContent":["<script>\r\nexport default {\r\n  name: \"NtRow\",\r\n  props: {\r\n    // 渲染标签名\r\n    tag: {\r\n      type: String,\r\n      default: \"div\",\r\n    },\r\n    // row的分行\r\n    gutter: {\r\n      type: [String, Number],\r\n      default: 0,\r\n    },\r\n    // 是否开启flex布局\r\n    flex: {\r\n      type: Boolean,\r\n      default: false,\r\n    },\r\n    // flex对齐方式\r\n    justify: {\r\n      type: String,\r\n      default: \"start\",\r\n    },\r\n  },\r\n  provide() {\r\n    return {\r\n      row: this,\r\n    };\r\n  },\r\n  computed: {\r\n    style() {\r\n      const ret = {};\r\n      // 存在gutter 整体两边间隔不空格\r\n      if (this.gutter) {\r\n        ret.marginLeft = `-${this.gutter / 2}px`;\r\n        ret.marginRight = ret.marginLeft;\r\n      }\r\n\r\n      return ret;\r\n    },\r\n  },\r\n  render(h) {\r\n    return h(\r\n      this.tag,\r\n      {\r\n        class: [\r\n          \"nt-row\",\r\n          this.flex ? \"nt-row--flex\" : \"\",\r\n          this.justify !== \"start\" ? `is-justify-${this.justify}` : \"\",\r\n        ],\r\n        style: this.style,\r\n      },\r\n      this.$slots.default\r\n    );\r\n  },\r\n};\r\n</script>\r\n\r\n<style scoped lang=\"scss\">\r\n$namespace: \"nt\";\r\n$modifier-separator: \"--\";\r\n$state-prefix: \"is-\";\r\n\r\n@mixin b($row) {\r\n  $name: $namespace + \"-\" + $row;\r\n  .#{$name} {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin m($modifier) {\r\n  $selector: &;\r\n  $currentSelector: \"\";\r\n  @each $unit in $modifier {\r\n    $currentSelector: #{$currentSelector +\r\n      & +\r\n      $modifier-separator +\r\n      $unit +\r\n      \",\"}; // &--flex   ->\r\n  }\r\n  @at-root {\r\n    #{$currentSelector} {\r\n      // nt-row--flex\r\n      @content;\r\n    }\r\n  }\r\n}\r\n\r\n@mixin when($state) {\r\n  @at-root {\r\n    // nt-row--flex.is-justify-center\r\n    &.#{$state-prefix + $state} {\r\n      @content;\r\n    }\r\n  }\r\n}\r\n\r\n@include b(row) {\r\n  position: relative;\r\n  box-sizing: border-box;\r\n  @include m(flex) {\r\n    // nt-row-flex\r\n    display: flex;\r\n    &:before,\r\n    &:after {\r\n      display: none;\r\n    }\r\n    // nt-row--flex.is-justify-center\r\n    @include when(justify-center) {\r\n      justify-content: center;\r\n    }\r\n    @include when(justify-start) {\r\n      justify-content: flex-start;\r\n    }\r\n    @include when(justify-space-between) {\r\n      justify-content: space-between;\r\n    }\r\n    @include when(justify-space-around) {\r\n      justify-content: space-around;\r\n    }\r\n  }\r\n}\r\n\r\n// .nt-row-flex {\r\n//   display: flex;\r\n// }\r\n// .nt-row-justify-center {\r\n//   justify-content: center;\r\n// }\r\n// .nt-row-justify-end {\r\n//   justify-content: flex-end;\r\n// }\r\n// .nt-row-justify-space-between {\r\n//   justify-content: space-between;\r\n// }\r\n// .nt-row-justify-space-around {\r\n//   justify-content: space-around;\r\n// }\r\n\r\n// @include b(row) {\r\n//   position: relative;\r\n//   box-sizing: border-box;\r\n//   @include utils-clearfix;\r\n\r\n//   @include m(flex) {\r\n//     display: flex;\r\n//     &:before,\r\n//     &:after {\r\n//       display: none;\r\n//     }\r\n\r\n//     @include when(justify-center) {\r\n//       justify-content: center;\r\n//     }\r\n//     @include when(justify-end) {\r\n//       justify-content: flex-end;\r\n//     }\r\n//     @include when(justify-space-between) {\r\n//       justify-content: space-between;\r\n//     }\r\n//     @include when(justify-space-around) {\r\n//       justify-content: space-around;\r\n//     }\r\n//   }\r\n// }\r\n</style>",".nt-row {\n  position: relative;\n  box-sizing: border-box;\n}\n.nt-row--flex {\n  display: flex;\n}\n.nt-row--flex:before, .nt-row--flex:after {\n  display: none;\n}\n.nt-row--flex.is-justify-center {\n  justify-content: center;\n}\n\n.nt-row--flex.is-justify-start {\n  justify-content: flex-start;\n}\n\n.nt-row--flex.is-justify-space-between {\n  justify-content: space-between;\n}\n\n.nt-row--flex.is-justify-space-around {\n  justify-content: space-around;\n}\n\n/*# sourceMappingURL=index.vue.map */"]}, media: undefined });
+      inject("data-v-ed1d3aa2_0", { source: ".nt-row[data-v-ed1d3aa2] {\n  position: relative;\n  box-sizing: border-box;\n}\n.nt-row--flex[data-v-ed1d3aa2] {\n  display: flex;\n}\n.nt-row--flex[data-v-ed1d3aa2]:before, .nt-row--flex[data-v-ed1d3aa2]:after {\n  display: none;\n}\n.nt-row--flex.is-justify-center[data-v-ed1d3aa2] {\n  justify-content: center;\n}\n.nt-row--flex.is-justify-start[data-v-ed1d3aa2] {\n  justify-content: flex-start;\n}\n.nt-row--flex.is-justify-space-between[data-v-ed1d3aa2] {\n  justify-content: space-between;\n}\n.nt-row--flex.is-justify-space-around[data-v-ed1d3aa2] {\n  justify-content: space-around;\n}\n\n/*# sourceMappingURL=index.vue.map */", map: {"version":3,"sources":["C:\\Users\\Administrator\\Desktop\\Nineteen-ui\\src\\components\\Row\\index.vue","index.vue"],"names":[],"mappings":"AAkEA;EAiCA,kBAAA;EACA,sBAAA;ACjGA;AD+EA;EAqBA,aAAA;ACjGA;ADkGA;EAEA,aAAA;ACjGA;ADmFA;EAkBA,uBAAA;AClGA;ADgFA;EAqBA,2BAAA;ACjGA;AD4EA;EAwBA,8BAAA;AChGA;ADwEA;EA2BA,6BAAA;AC/FA;;AAEA,oCAAoC","file":"index.vue","sourcesContent":["<script>\r\nexport default {\r\n  name: \"NtRow\",\r\n  props: {\r\n    // 渲染标签名\r\n    tag: {\r\n      type: String,\r\n      default: \"div\",\r\n    },\r\n    // row的分行\r\n    gutter: {\r\n      type: [String, Number],\r\n      default: 0,\r\n    },\r\n    // 是否开启flex布局\r\n    flex: {\r\n      type: Boolean,\r\n      default: false,\r\n    },\r\n    // flex对齐方式\r\n    justify: {\r\n      type: String,\r\n      default: \"start\",\r\n    },\r\n  },\r\n  provide() {\r\n    return {\r\n      row: this,\r\n    };\r\n  },\r\n  computed: {\r\n    style() {\r\n      const ret = {};\r\n      // 存在gutter 整体两边间隔不空格\r\n      if (this.gutter) {\r\n        ret.marginLeft = `-${this.gutter / 2}px`;\r\n        ret.marginRight = ret.marginLeft;\r\n      }\r\n\r\n      return ret;\r\n    },\r\n  },\r\n  render(h) {\r\n    return h(\r\n      this.tag,\r\n      {\r\n        class: [\r\n          \"nt-row\",\r\n          this.flex ? \"nt-row--flex\" : \"\",\r\n          this.justify !== \"start\" ? `is-justify-${this.justify}` : \"\",\r\n        ],\r\n        style: this.style,\r\n      },\r\n      this.$slots.default\r\n    );\r\n  },\r\n};\r\n</script>\r\n\r\n<style scoped lang=\"scss\">\r\n$namespace: \"nt\";\r\n$modifier-separator: \"--\";\r\n$state-prefix: \"is-\";\r\n\r\n@mixin b($row) {\r\n  $name: $namespace + \"-\" + $row;\r\n  .#{$name} {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin m($modifier) {\r\n  $selector: &;\r\n  $currentSelector: \"\";\r\n  @each $unit in $modifier {\r\n    $currentSelector: #{$currentSelector +\r\n      & +\r\n      $modifier-separator +\r\n      $unit +\r\n      \",\"}; // &--flex   ->\r\n  }\r\n  @at-root {\r\n    #{$currentSelector} {\r\n      // nt-row--flex\r\n      @content;\r\n    }\r\n  }\r\n}\r\n\r\n@mixin when($state) {\r\n  @at-root {\r\n    // nt-row--flex.is-justify-center\r\n    &.#{$state-prefix + $state} {\r\n      @content;\r\n    }\r\n  }\r\n}\r\n\r\n@include b(row) {\r\n  position: relative;\r\n  box-sizing: border-box;\r\n  @include m(flex) {\r\n    // nt-row-flex\r\n    display: flex;\r\n    &:before,\r\n    &:after {\r\n      display: none;\r\n    }\r\n    // nt-row--flex.is-justify-center\r\n    @include when(justify-center) {\r\n      justify-content: center;\r\n    }\r\n    @include when(justify-start) {\r\n      justify-content: flex-start;\r\n    }\r\n    @include when(justify-space-between) {\r\n      justify-content: space-between;\r\n    }\r\n    @include when(justify-space-around) {\r\n      justify-content: space-around;\r\n    }\r\n  }\r\n}\r\n\r\n// .nt-row-flex {\r\n//   display: flex;\r\n// }\r\n// .nt-row-justify-center {\r\n//   justify-content: center;\r\n// }\r\n// .nt-row-justify-end {\r\n//   justify-content: flex-end;\r\n// }\r\n// .nt-row-justify-space-between {\r\n//   justify-content: space-between;\r\n// }\r\n// .nt-row-justify-space-around {\r\n//   justify-content: space-around;\r\n// }\r\n\r\n// @include b(row) {\r\n//   position: relative;\r\n//   box-sizing: border-box;\r\n//   @include utils-clearfix;\r\n\r\n//   @include m(flex) {\r\n//     display: flex;\r\n//     &:before,\r\n//     &:after {\r\n//       display: none;\r\n//     }\r\n\r\n//     @include when(justify-center) {\r\n//       justify-content: center;\r\n//     }\r\n//     @include when(justify-end) {\r\n//       justify-content: flex-end;\r\n//     }\r\n//     @include when(justify-space-between) {\r\n//       justify-content: space-between;\r\n//     }\r\n//     @include when(justify-space-around) {\r\n//       justify-content: space-around;\r\n//     }\r\n//   }\r\n// }\r\n</style>\r\n",".nt-row {\n  position: relative;\n  box-sizing: border-box;\n}\n.nt-row--flex {\n  display: flex;\n}\n.nt-row--flex:before, .nt-row--flex:after {\n  display: none;\n}\n.nt-row--flex.is-justify-center {\n  justify-content: center;\n}\n\n.nt-row--flex.is-justify-start {\n  justify-content: flex-start;\n}\n\n.nt-row--flex.is-justify-space-between {\n  justify-content: space-between;\n}\n\n.nt-row--flex.is-justify-space-around {\n  justify-content: space-around;\n}\n\n/*# sourceMappingURL=index.vue.map */"]}, media: undefined });
 
     };
     /* scoped */
-    const __vue_scope_id__$1 = "data-v-b3cb04dc";
+    const __vue_scope_id__$1 = "data-v-ed1d3aa2";
     /* module identifier */
     const __vue_module_identifier__$1 = undefined;
     /* functional template */
@@ -315,9 +315,94 @@
       undefined
     );
 
+  //
+  //
+  //
+  //
+  //
+  var script$2 = {
+    name: "NtContainer",
+    props: {
+      direction: String
+    },
+    computed: {
+      /* 
+        这里用了一个小技巧，this.$slots.default 获取的是默认插槽中的所有 vnodes 节点，然后对他们遍历，通过 vnode.componentOptions.tag 来判断这个 vnode 是不是 <nt-header> 或者是 <nt-footer>。vnode.componentOptions 并不在官网 API 里，但是对于熟读 Vue 源码的人来说并不陌生。
+      */
+      isVertival: function isVertival() {
+        // 垂直
+        if (this.direction === "vertical") {
+          return true;
+        } else if (this.direction === "horizontal") {
+          // 水平
+          return false;
+        } else {
+          return this.$slots && this.$slots["default"] ? // this.$slots返回的是一个Object {}
+          // Object中每一个对象key为slot名 value为 <Array>vNode 包含对应名称插槽内的VnodeArray
+          this.$slots["default"].some(function (vNode) {
+            // Vue源码中vNode.componentOptions.tag拿到Vnode组件的名称
+            // vNode.componentOptions只是组件才属性才生效
+            var tag = vNode.componentOptions.tag;
+            return tag === "el-header" || "el-footer";
+          }) : false;
+        }
+      }
+    }
+  };
+
+  /* script */
+  const __vue_script__$2 = script$2;
+
+  /* template */
+  var __vue_render__ = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c(
+      "section",
+      { staticClass: "nt-container", class: { "is-vertical": _vm.isVertival } },
+      [_vm._t("default")],
+      2
+    )
+  };
+  var __vue_staticRenderFns__ = [];
+  __vue_render__._withStripped = true;
+
+    /* style */
+    const __vue_inject_styles__$2 = function (inject) {
+      if (!inject) return
+      inject("data-v-44e042c7_0", { source: ".nt-container[data-v-44e042c7] {\n  display: flex;\n  flex-direction: row;\n  flex: 1;\n  flex-basis: auto;\n  box-sizing: border-box;\n  min-width: 0;\n}\n.is-vertical[data-v-44e042c7] {\n  flex-direction: column;\n}\n\n/*# sourceMappingURL=index.vue.map */", map: {"version":3,"sources":["C:\\Users\\Administrator\\Desktop\\Nineteen-ui\\src\\components\\Container\\index.vue","index.vue"],"names":[],"mappings":"AA6CA;EAeA,aAAA;EACA,mBAAA;EACA,OAAA;EACA,gBAAA;EACA,sBAAA;EACA,YAAA;AC1DA;AD8CA;EAgBA,sBAAA;AC1DA;;AAEA,oCAAoC","file":"index.vue","sourcesContent":["<template>\r\n  <section class=\"nt-container\" :class=\"{ 'is-vertical': isVertival }\">\r\n    <slot />\r\n  </section>\r\n</template>\r\n<script>\r\nexport default {\r\n  name: \"NtContainer\",\r\n  props: {\r\n    direction: String,\r\n  },\r\n  computed: {\r\n    /* \r\n      这里用了一个小技巧，this.$slots.default 获取的是默认插槽中的所有 vnodes 节点，然后对他们遍历，通过 vnode.componentOptions.tag 来判断这个 vnode 是不是 <nt-header> 或者是 <nt-footer>。vnode.componentOptions 并不在官网 API 里，但是对于熟读 Vue 源码的人来说并不陌生。\r\n    */\r\n    isVertival() {\r\n      // 垂直\r\n      if (this.direction === \"vertical\") {\r\n        return true;\r\n      } else if (this.direction === \"horizontal\") {\r\n        // 水平\r\n        return false;\r\n      } else {\r\n        return this.$slots && this.$slots.default\r\n          ? // this.$slots返回的是一个Object {}\r\n            // Object中每一个对象key为slot名 value为 <Array>vNode 包含对应名称插槽内的VnodeArray\r\n            this.$slots.default.some((vNode) => {\r\n              // Vue源码中vNode.componentOptions.tag拿到Vnode组件的名称\r\n              // vNode.componentOptions只是组件才属性才生效\r\n              const tag = vNode.componentOptions.tag;\r\n              return tag === \"el-header\" || \"el-footer\";\r\n            })\r\n          : false;\r\n      }\r\n    },\r\n  },\r\n};\r\n</script>\r\n<style lang=\"scss\" scoped>\r\n$namespace: \"nt\";\r\n$modifier-separator: \"--\";\r\n$state-prefix: \"is-\";\r\n\r\n@mixin b($row) {\r\n  $name: $namespace + \"-\" + $row;\r\n  .#{$name} {\r\n    @content;\r\n  }\r\n}\r\n\r\n@mixin when($state) {\r\n  @at-root {\r\n    // nt-row--flex.is-justify-center\r\n    .#{$state-prefix + $state} {\r\n      @content;\r\n    }\r\n  }\r\n}\r\n\r\n@include b(container) {\r\n  display: flex;\r\n  flex-direction: row;\r\n  flex: 1;\r\n  flex-basis: auto;\r\n  box-sizing: border-box;\r\n  min-width: 0;\r\n}\r\n\r\n@include when(vertical) {\r\n  flex-direction: column;\r\n}\r\n</style>\r\n",".nt-container {\n  display: flex;\n  flex-direction: row;\n  flex: 1;\n  flex-basis: auto;\n  box-sizing: border-box;\n  min-width: 0;\n}\n\n.is-vertical {\n  flex-direction: column;\n}\n\n/*# sourceMappingURL=index.vue.map */"]}, media: undefined });
+
+    };
+    /* scoped */
+    const __vue_scope_id__$2 = "data-v-44e042c7";
+    /* module identifier */
+    const __vue_module_identifier__$2 = undefined;
+    /* functional template */
+    const __vue_is_functional_template__$2 = false;
+    /* style inject SSR */
+    
+    /* style inject shadow dom */
+    
+
+    
+    const __vue_component__$2 = /*#__PURE__*/normalizeComponent(
+      { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
+      __vue_inject_styles__$2,
+      __vue_script__$2,
+      __vue_scope_id__$2,
+      __vue_is_functional_template__$2,
+      __vue_module_identifier__$2,
+      false,
+      createInjector,
+      undefined,
+      undefined
+    );
+
   function main (Vue) {
     Vue.component(__vue_component__.name, __vue_component__);
     Vue.component(__vue_component__$1.name, __vue_component__$1);
+    Vue.component(__vue_component__$2.name, __vue_component__$2);
   }
 
   return main;
